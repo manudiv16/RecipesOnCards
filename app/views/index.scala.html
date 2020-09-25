@@ -1,8 +1,36 @@
-@()
+@import controllers._
+@(cards: List[card])
 
 @main("Welcome") {
-@defining(play.core.PlayVersion.current) { version =>
+<section class="card-list">
+    @for( card <- cards) {
+    <article class="card">
+        <header class="card-header">
+            <p>@card.date</p>
+            <h2>@card.title</h2>
+        </header>
+        <div class="image">
+            <img src="@card.img" alt="" srcset="">
+        </div>
+        <div class="card-author">
+            <a class="author-avatar" href="#">
+                <img src="@card.authorImg"/>
+            </a>
+            <svg class="half-circle" viewBox="0 0 106 57">
+                <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
+            </svg>
 
-Hello world
-}
+            <div class="author-name">
+                <div class="author-name-prefix">@card.authorUser</div>
+                @card.authorName
+            </div>
+        </div>
+        <div class="tags">
+            @for(tag <- card.tags){
+            <a href="#">@tag</a>
+            }
+        </div>
+    </article>
+    }
+</section>
 }
